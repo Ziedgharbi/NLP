@@ -79,12 +79,8 @@ scores=cross_val_score(randf, x_train_vec,y_train,cv=4)
 
 scores.mean()
 
-
-
 ## test prediction
 
 rst.predict(vectorizer.transform (['i enjoyed a lot']))
 rst.predict(vectorizer.transform (['come and enjoy me on xxx fun']))
-
-
 
