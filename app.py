@@ -3,17 +3,13 @@ import numpy as np
 import matplotlib.pyplot as plt
 import glob
 
-
 from sklearn.model_selection import train_test_split, cross_val_score
 from sklearn.feature_extraction.text import  CountVectorizer
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import classification_report, confusion_matrix, ConfusionMatrixDisplay
 
-
 directory_path="C:/Users/pc/Nextcloud/Python/GITHUB/NLP/"
 data_path=directory_path+"data/"
-
-
 
 file_name=[ name.split("\\",1)[1] for name in  glob.glob(data_path+"*.csv")  ]
 
@@ -34,7 +30,6 @@ df.CLASS.value_counts(normalize=True).plot.pie()
 
 df["CONTENT"].iloc[3]
 
-
 ## split data 
 seed=4040
 
@@ -43,14 +38,12 @@ y=df.CLASS
 
 x_train, x_test, y_train, y_test= train_test_split(X,y, test_size=0.2, shuffle=True, random_state=seed)
 
-
 # vectorize text feature 
 vectorizer=CountVectorizer()
 x_train_vec=vectorizer.fit_transform(x_train)
 x_test_vec=vectorizer.transform(x_test)
 
 vectorizer.get_feature_names_out() # see content of features
-
 
 # apply random forest classifier
 
@@ -72,8 +65,6 @@ disp=ConfusionMatrixDisplay(conf_matrix)
 disp.plot()
 plt.show()
 
-
-
 ## Testing performence by using cross validation : mean of performence
 scores=cross_val_score(randf, x_train_vec,y_train,cv=4)
 
@@ -83,4 +74,3 @@ scores.mean()
 
 rst.predict(vectorizer.transform (['i enjoyed a lot']))
 rst.predict(vectorizer.transform (['come and enjoy me on xxx fun']))
-
